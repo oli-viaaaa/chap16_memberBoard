@@ -2,68 +2,86 @@ package com.javalab.vo;
 
 public class MemberBean {
 	// 멤버 변수
-   private String id;
-   private String pwd;
-   private String name;
-   private String email;
-   private String joindate;
+	private String id;
+	private String pwd;
+	private String name;
+	private String email;
+	private String joindate;
+	
+	// 기본 생성자
+	public MemberBean() {		
+	}
+	
+	
+	public MemberBean(String id, String pwd) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
+	}
 
-   public MemberBean() {
-	super();
-	// TODO Auto-generated constructor stub
-   }
+	// 오버로딩 생성자
+	public MemberBean(String id, String pwd, String name, String email, String joindate) {
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.email = email;
+		this.joindate = joindate;
+	}
 
-public MemberBean(String id, String pwd, String name, String email, String joindate) {
-	super();
-	this.id = id;
-	this.pwd = pwd;
-	this.name = name;
-	this.email = email;
-	this.joindate = joindate;
-}
+	public MemberBean(String id, String name, String email, String joindate) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.joindate = joindate;
+	}
 
-public String getId() {
-	return id;
-}
 
-public void setId(String id) {
-	this.id = id;
-}
+	public String getId() {
+		return id;
+	}
 
-public String getPwd() {
-	return pwd;
-}
 
-public void setPwd(String pwd) {
-	this.pwd = pwd;
-}
+	public void setId(String id) {
+		this.id = id;
+	}
 
-public String getName() {
-	return name;
-}
 
-public void setName(String name) {
-	this.name = name;
-}
+	public String getPwd() {
+		return pwd;
+	}
 
-public String getEmail() {
-	return email;
-}
 
-public void setEmail(String email) {
-	this.email = email;
-}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
 
-public String getJoindate() {
-	return joindate;
-}
 
-public void setJoindate(String joindate) {
-	this.joindate = joindate;
-}
-   
-   
-   
-   
+	public String getName() {
+		return name;
+	}
 
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getJoindate() {
+		return joindate;
+	}
+
+
+	public void setJoindate(String joindate) {
+		this.joindate = joindate;
+	}
 }

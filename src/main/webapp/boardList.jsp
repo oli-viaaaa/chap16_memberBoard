@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 목록</title>
+
 	<script type="text/javascript">
 		function goUrl(url) {
 			var id = '${sessionScope.member.id}';
@@ -60,11 +61,11 @@
 <body>
 	<h1 style="text-align:center;">게시물 목록</h1>
 	<div style="text-align: right;">
-		<c:if test="${not empty member.id}" >
-			<strong>${member.name}(${member.id})님</strong>
+		<c:if test="${not empty sessionScope.member.id}" >
+			<strong>${sessionScope.member.name}(${sessionScope.member.id})님</strong>
 			<a href="${pageContext.request.contextPath}/logout"><strong>로그아웃</strong></a>
 		</c:if>
-		<c:if test="${empty member.id}" >
+		<c:if test="${empty sessionScope.member.id}" >
 			<a href="${pageContext.request.contextPath}/login"><strong>로그인</strong></a>
 		</c:if>
 	</div>
@@ -88,8 +89,8 @@
 					<th>등록 일시</th>
 					<th>조회수</th>
 					<th>그룹번호</th>
+					<th>그룹내순서</th>
 					<th>들여쓰기</th>
-					<th>그룹내번호</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -105,12 +106,6 @@
 								<td align="center">
 									<c:out value="${i.count}" />
 								</td>
-	<%-- 							<td>
-									<a href="<c:url value='/boardView?no=${board.no}' />">
-										<c:out value="${board.title}" />
-									</a>
-								</td>
-								 --%>
 								<td align="left">
 									<c:if test="${board.reply_indent > 0}">
 										<c:forEach begin="1" end="${board.reply_indent}">
