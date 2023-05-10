@@ -34,14 +34,12 @@ public class BoardReplyWriteServlet extends HttpServlet {
 	/**
 	 * GET 접근시 (답글 입력폼 요청시 응답 메소드)
 	 */
-	protected void doGet(HttpServletRequest request, 
-						HttpServletResponse response) 
-						throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+		throws ServletException, IOException {
 
 		//세션에 로그인 정보 유무 확인
 		HttpSession session = request.getSession();
 		MemberBean mb = (MemberBean)session.getAttribute("member");
-		// getAttribute는 Object 타입으로 형변환으로 꺼내와야 한다.
 
 		if(mb != null) {	// 로그인한 회원
 			int no = 0;
@@ -120,13 +118,12 @@ public class BoardReplyWriteServlet extends HttpServlet {
 		board.setReply_indent(reply_indent + 1);// 답글이니까 원글의 들여쓰기+1
 		
 		// [디버깅]전달할 객체가 제대로 생성되었지 검증
-		System.out.println(board.toString());
+		System.out.println("reply_group : " + reply_group + " reply_order : " + reply_order);
 		
 		// 답글 저장전 사전 작업(기존 답글들 뒤로 밀어냄)이 성공하면
-		if(boardDao.reqUpdate(reply_group, reply_order)) {
-			// 답글 저장 
-			boardDao.insertReplyBoard(board);
-		}
+		boardDao.reqUpdate(reply_group, reply_order);
+		// 답글 저장 
+		boardDao.insertReplyBoard(board);		
 		
 		// 저장후 게시물 목록 페이지로 이동
 		String contextPath = request.getContextPath();		

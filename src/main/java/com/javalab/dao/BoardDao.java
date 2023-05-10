@@ -63,7 +63,7 @@ public class BoardDao {
 			query.append("		order by reply_group desc, reply_order, reply_indent asc");			
 			query.append("     )");			
 			query.append(")");			
-			// sql.append("where rnum >= 1 and rnum <=10"); // 페이징에서 필요			
+			//sql.append("where rnum >= 1 and rnum <=10"); // 페이징에서 필요			
 			
 			System.out.println("SQL :  " + query.toString());
 			
@@ -256,6 +256,8 @@ public class BoardDao {
 	
 	// 답변 게시물 삽입 메소드
 	public int insertReplyBoard(BoardVo board) {
+		System.out.println("insertReplyBoard");
+
 		int result = 0;
 		try {
 			con = dataSource.getConnection();
@@ -315,13 +317,12 @@ public class BoardDao {
 	 * 그리고 밀린 자리에 현재 답글이 위치하게 됨.(답글중 가장 작은 order를 갖게 되어 부모 바로 밑으로 오게됨)
 	 */
 	public boolean reqUpdate(int reply_group, int reply_order) {
-		
+		System.out.println("reqUpdate reply_group : " + reply_group +" reply_order : " + reply_order);
 		boolean result = false;
 		
 		try {
 			StringBuffer query = new StringBuffer();
 			con = dataSource.getConnection();
-			con.setAutoCommit(false);	// 자동 커밋 false
 			
 			// group(그룹번호)와 order(답글순서)를 확인하여 원본 글에 다른 답변이 있으면
 			// 답변글 중에서 답변 글보다 상위에 있는 즉 seq가 큰 답글들을 seq 값을 +1
@@ -333,11 +334,12 @@ public class BoardDao {
 			pstmt.setInt(1, reply_group);
 			pstmt.setInt(2, reply_order);
 			int flag = pstmt.executeUpdate();
-			
+
+			System.out.println("flag : " + flag);
 			// 업데이트가 정상적으로 처리되었으면 
 			if(flag > 0) {
 				result = true;
-				con.commit();	// 커밋
+				//con.commit();	// 커밋
 			}
 		}catch(Exception e) {
 			try {

@@ -95,7 +95,6 @@ public class BoardModifyServlet extends HttpServlet {
 		vo.setId(id);
 		
 		// 게시물 목록을 조회
-		// return은 int 값 0보다 클경우 업데이트가 이루어짐 
 		int result = boardDao.modifyBoard(vo);
 		if(result > 0) {
 			System.out.println("게시물 수정 성공!");
@@ -107,7 +106,7 @@ public class BoardModifyServlet extends HttpServlet {
 		// 컨텍스트 패스를 붙이지 않아도 이동은 하지만 일반적으로 붙여서 이동해야함.
 		// 왜냐하면 다른 프로젝트(컨텍스트)로 이동할 수도 있기 때문에.
 		String contextPath = request.getContextPath();		
-		String url = contextPath + "/boardList";	// 게시물 목록 서블릿 호출, jsp로 호출하면 빈손으로 가는 것. 		
+		String url = contextPath + "/boardList";	// 게시물 목록 서블릿 호출		
 		System.out.println(url);
 		response.sendRedirect(url);
 	}
